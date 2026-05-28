@@ -1,0 +1,239 @@
+<?xml version="1.0" ?>
+<!-- 8m x 5m 避障场景：四周墙壁（左右各有出入口缺口）+ 5个障碍物 -->
+<sdf version="1.6">
+  <world name="obstacle_course">
+
+    <!-- 物理引擎参数 -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- 太阳光照 -->
+    <include>
+      <uri>world://sun</uri>
+    </include>
+
+    <!-- 地面：8m x 5m 灰色水泥平面 -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>8 5 0.05</size>
+            </box>
+          </geometry>
+          <pose>0 0 -0.025 0 0 0</pose>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>8 5 0.05</size>
+            </box>
+          </geometry>
+          <pose>0 0 -0.025 0 0 0</pose>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ======== 围墙（左右墙留出入口/出口缺口） ======== -->
+    <!-- 后墙 (y=+2.5侧) -->
+    <model name="wall_back">
+      <static>true</static>
+      <pose>4 2.5 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>8 0.1 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>8 0.1 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 前墙 (y=-2.5侧) -->
+    <model name="wall_front">
+      <static>true</static>
+      <pose>4 -2.5 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>8 0.1 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>8 0.1 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 左墙 (x=0侧) — y=0处留有入口缺口 -->
+    <model name="wall_left_bottom">
+      <static>true</static>
+      <pose>0 -1.75 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_left_top">
+      <static>true</static>
+      <pose>0 1.75 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 右墙 (x=8侧) — y=0处留有出口缺口 -->
+    <model name="wall_right_bottom">
+      <static>true</static>
+      <pose>8 -1.75 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_right_top">
+      <static>true</static>
+      <pose>8 1.75 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.1 1.5 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ======== 5个障碍物（黑色） ======== -->
+
+    <!-- 障碍物1：方块 @ (2.5, 1.5) -->
+    <model name="obstacle_1">
+      <static>true</static>
+      <pose>2.5 1.5 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.6 0.6 0.6</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.6 0.6 0.6</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Black</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 障碍物2：方块 @ (2.5, -1.5) -->
+    <model name="obstacle_2">
+      <static>true</static>
+      <pose>2.5 -1.5 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.6 0.6 0.6</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.6 0.6 0.6</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Black</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 障碍物3：扁方块 @ (4.5, 2.0) -->
+    <model name="obstacle_3">
+      <static>true</static>
+      <pose>4.5 2.0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.8 0.4 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.8 0.4 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Black</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 障碍物4：扁方块 @ (4.5, -2.0) -->
+    <model name="obstacle_4">
+      <static>true</static>
+      <pose>4.5 -2.0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.8 0.4 0.3</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.8 0.4 0.3</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Black</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 障碍物5：圆柱 @ (6.0, 0) -->
+    <model name="obstacle_5">
+      <static>true</static>
+      <pose>6.0 0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.25</radius><length>0.3</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.25</radius><length>0.3</length></cylinder></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Black</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ======== 入口/出口地面标记 ======== -->
+    <!-- 入口标记（绿色矩形） -->
+    <model name="entrance_marker">
+      <static>true</static>
+      <pose>0.3 0 0.005 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.6 1.0 0.01</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Green</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 出口标记（红色矩形） -->
+    <model name="exit_marker">
+      <static>true</static>
+      <pose>7.7 0 0.005 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.6 1.0 0.01</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Red</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
