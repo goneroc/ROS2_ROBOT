@@ -22,9 +22,9 @@ def generate_launch_description():
     # 处理 xacro → URDF
     robot_description_content = xacro.process_file(xacro_file).toxml()
 
-    # 机器人出生点：入口处 (0.5, 0)，朝向 +x 方向
+    # 机器人出生点：入口处 (0.5, 2.5)，朝向 +x 方向
     spawn_x = '0.5'
-    spawn_y = '0.0'
+    spawn_y = '2.5'
     spawn_z = '0.2'   # 略高于地面，防止卡进地面
     spawn_yaw = '0.0' # 朝向正 x 轴
 

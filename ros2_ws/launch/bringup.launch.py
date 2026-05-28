@@ -71,7 +71,7 @@ def generate_launch_description():
             '-topic', 'robot_description',
             '-entity', 'diff_drive_robot',
             '-x', '0.5',
-            '-y', '0.0',
+            '-y', '2.5',
             '-z', '0.2',
             '-Y', '0.0',
         ]
