@@ -195,7 +195,7 @@
     </plugin>
   </gazebo>
 
-  <!-- 激光雷达插件：发布 /scan 话题，360度扫描，范围0.1~5m -->
+  <!-- 激光雷达插件：libgazebo_ros_laser.so 确保发布到 /scan -->
   <gazebo reference="laser_link">
     <sensor type="ray" name="laser_scanner">
       <always_on>true</always_on>
