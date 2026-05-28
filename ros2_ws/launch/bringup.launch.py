@@ -6,9 +6,9 @@ from launch.actions import (
     IncludeLaunchDescription,
     GroupAction,
 )
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, Command
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
 import xacro
 
@@ -71,7 +71,7 @@ def generate_launch_description():
             '-topic', 'robot_description',
             '-entity', 'diff_drive_robot',
             '-x', '0.5',
-            '-y', '0.0',
+            '-y', '2.5',
             '-z', '0.2',
             '-Y', '0.0',
         ]
@@ -82,7 +82,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_slam, 'launch', 'slam.launch.py')
         ),
-        condition=IfCondition(LaunchConfiguration('mode') == 'slam')
+        condition=IfCondition(PythonExpression(["'", LaunchConfiguration('mode'), "' == 'slam'"]))
     )
 
     # ---- Nav 模式：Nav2 自主导航 ----
@@ -90,7 +90,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_nav, 'launch', 'nav.launch.py')
         ),
-        condition=IfCondition(LaunchConfiguration('mode') == 'nav')
+        condition=IfCondition(PythonExpression(["'", LaunchConfiguration('mode'), "' == 'nav'"]))
     )
 
     return LaunchDescription([
