@@ -5,9 +5,9 @@
 
     <!-- 物理引擎参数 -->
     <physics type="ode">
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_update_rate>250</real_time_update_rate>
     </physics>
 
     <!-- 太阳光照 -->
@@ -40,6 +40,14 @@
               <name>Gazebo/Grey</name>
             </script>
           </material>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </visual>
       </link>
     </model>
